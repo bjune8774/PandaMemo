@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.panda.memo.MemoViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MemoContentFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="1dp"
+            android:background="#FFFFFF" />
+
+        <RelativeLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolBar"
+            android:layout_alignParentBottom="true"
+            android:background="#FFFFFF">
+
+            <EditText
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:gravity="start|center_vertical"
+                android:hint="Title"
+                android:padding="16dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/contentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/titleTextView"
+                android:layout_alignParentBottom="true"
+                android:background="@null"
+                android:gravity="top|start"
+                android:hint="Content"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:padding="16dp"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>
