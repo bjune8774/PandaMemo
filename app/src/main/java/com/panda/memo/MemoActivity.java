@@ -1,34 +1,110 @@
 package com.panda.memo;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.panda.memo.databinding.ActivityMemoBinding;
 
+import static androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE;
+
 public class MemoActivity extends AppCompatActivity {
+    private MemoViewModel mMemoViewModel;
+    private ActivityMemoBinding mBinding;
+
     private FragmentManager mFragmentManager = getSupportFragmentManager();
     private FragmentTransaction mTransaction;
 
     private MemoListFragment mListFragment;
     private MemoContentFragment mContentFragment;
+    private MemoEmptyFragment mEmptyFragment;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityMemoBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_memo);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_memo);
+        mMemoViewModel = new ViewModelProvider(this, new MemoViewModel.Factory()).get(MemoViewModel.class);
 
-        mListFragment = new MemoListFragment();
-        mContentFragment = new MemoContentFragment();
+        mListFragment = new MemoListFragment(mMemoViewModel);
+        mContentFragment = new MemoContentFragment(mMemoViewModel);
+        mEmptyFragment = new MemoEmptyFragment();
 
+        mListFragment.setOnItemClickListener(new MemoListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("pos", pos);
+                mContentFragment.setArguments(bundle);
+
+                mBinding.fabAddMemo.hide();
+                replaceFragment(mContentFragment, TRANSIT_FRAGMENT_FADE);
+            }
+        });
+
+        mBinding.fabAddMemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContentFragment.setArguments(null);
+
+                mBinding.fabAddMemo.hide();
+                replaceFragment(mContentFragment, TRANSIT_FRAGMENT_FADE);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        replaceHomeFragment(TRANSIT_FRAGMENT_FADE);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mCurrentFragment == mContentFragment) {
+            mContentFragment.onBackKeyPressed();
+            mBinding.fabAddMemo.show();
+            replaceHomeFragment(TRANSIT_FRAGMENT_FADE);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void replaceHomeFragment(int transitionType) {
+        if (mMemoViewModel.getMemoCount() == 0) {
+            replaceFragment(mEmptyFragment, transitionType);
+        } else {
+            replaceFragment(mListFragment, transitionType);
+        }
+    }
+
+    private void replaceFragment(Fragment fragment, int transitionType) {
+        mCurrentFragment = fragment;
         mTransaction = mFragmentManager.beginTransaction();
-        mTransaction.replace(R.id.frameLayout, mListFragment).commitAllowingStateLoss();
-
+        mTransaction.replace(R.id.frameLayout, mCurrentFragment);
+//        mTransaction.addToBackStack(null);
+        mTransaction.setTransition(transitionType);
+        mTransaction.commit();
     }
 }

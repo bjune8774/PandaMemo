@@ -19,7 +19,19 @@
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="1dp"
-            android:background="#FFFFFF" />
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="메모 작성"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
             android:id="@+id/content"
@@ -30,7 +42,7 @@
             android:background="#FFFFFF">
 
             <EditText
-                android:id="@+id/titleTextView"
+                android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
@@ -41,10 +53,10 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/contentTextView"
+                android:id="@+id/contentEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/titleTextView"
+                android:layout_below="@+id/titleEditText"
                 android:layout_alignParentBottom="true"
                 android:background="@null"
                 android:gravity="top|start"

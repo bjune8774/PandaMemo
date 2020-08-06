@@ -1,25 +1,19 @@
 package com.panda.memo;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.panda.memo.MemoData.MemoItem;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link MemoItem}.
- * TODO: Replace the implementation with code for your data type.
- */
-public class MemoItemRecyclerViewAdapter extends RecyclerView.Adapter<MemoItemRecyclerViewAdapter.MemoViewHolder> {
-
+public class MemoListAdapter extends RecyclerView.Adapter<MemoListAdapter.MemoViewHolder> {
     private final List<MemoItem> mValues;
+    private OnItemClickListener mListener;
 
-    public MemoItemRecyclerViewAdapter(List<MemoItem> items) {
+    public MemoListAdapter(List<MemoItem> items) {
         mValues = items;
     }
 
@@ -33,13 +27,21 @@ public class MemoItemRecyclerViewAdapter extends RecyclerView.Adapter<MemoItemRe
     @Override
     public void onBindViewHolder(final MemoViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mTitle.setText(mValues.get(position).id);
+        holder.mTitle.setText(mValues.get(position).title);
         holder.mContentView.setText(mValues.get(position).content);
     }
 
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int pos);
     }
 
     public class MemoViewHolder extends RecyclerView.ViewHolder {
@@ -53,6 +55,16 @@ public class MemoItemRecyclerViewAdapter extends RecyclerView.Adapter<MemoItemRe
             mView = view;
             mTitle = (TextView) view.findViewById(R.id.title);
             mContentView = (TextView) view.findViewById(R.id.content);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        mListener.onItemClick(view, pos);
+                    }
+                }
+            });
         }
 
         @Override
