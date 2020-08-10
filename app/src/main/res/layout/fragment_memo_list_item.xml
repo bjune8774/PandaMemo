@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="1dp"
-    android:background="#FFFFFF"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
+    android:background="#eeeeee"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_margin="@dimen/text_margin"
         android:gravity="left"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/content"
@@ -22,5 +23,5 @@
         android:layout_margin="@dimen/text_margin"
         android:gravity="left"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 </LinearLayout>

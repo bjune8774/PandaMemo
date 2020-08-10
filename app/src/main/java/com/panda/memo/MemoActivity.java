@@ -38,6 +38,8 @@ public class MemoActivity extends AppCompatActivity {
         mContentFragment = new MemoContentFragment(mMemoViewModel);
         mEmptyFragment = new MemoEmptyFragment();
 
+        mCurrentFragment = getHomeFragment();
+
         mListFragment.setOnItemClickListener(new MemoListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -64,7 +66,7 @@ public class MemoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        replaceHomeFragment(TRANSIT_FRAGMENT_FADE);
+        replaceFragment(mCurrentFragment, TRANSIT_FRAGMENT_FADE);
     }
 
     @Override
@@ -85,17 +87,18 @@ public class MemoActivity extends AppCompatActivity {
         if (mCurrentFragment == mContentFragment) {
             mContentFragment.onBackKeyPressed();
             mBinding.fabAddMemo.show();
-            replaceHomeFragment(TRANSIT_FRAGMENT_FADE);
+
+            replaceFragment(getHomeFragment(), TRANSIT_FRAGMENT_FADE);
         } else {
             super.onBackPressed();
         }
     }
 
-    private void replaceHomeFragment(int transitionType) {
+    private Fragment getHomeFragment() {
         if (mMemoViewModel.getMemoCount() == 0) {
-            replaceFragment(mEmptyFragment, transitionType);
+            return mEmptyFragment;
         } else {
-            replaceFragment(mListFragment, transitionType);
+            return mListFragment;
         }
     }
 

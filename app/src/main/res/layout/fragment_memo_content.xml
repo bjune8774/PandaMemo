@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.panda.memo.MemoViewModel" />
@@ -11,16 +12,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#aaaaaa"
         tools:context=".MemoContentFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="1dp"
             android:background="#FFFFFF"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingEnd="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -30,7 +33,6 @@
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
         </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
@@ -39,18 +41,24 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolBar"
             android:layout_alignParentBottom="true"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="16dp">
 
             <EditText
                 android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginTop="16dp"
+
                 android:background="@null"
                 android:gravity="start|center_vertical"
                 android:hint="Title"
-                android:padding="16dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/contentEditText"
@@ -58,11 +66,12 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/titleEditText"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="16dp"
+
                 android:background="@null"
                 android:gravity="top|start"
                 android:hint="Content"
                 android:inputType="textMultiLine|textNoSuggestions"
-                android:padding="16dp"
                 android:textSize="16sp" />
         </RelativeLayout>
 
