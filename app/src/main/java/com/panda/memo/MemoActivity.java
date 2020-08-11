@@ -75,6 +75,9 @@ public class MemoActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 break;
+            case R.id.menuSave:
+                onBackPressed();
+                break;
             default:
                 break;
         }
@@ -85,7 +88,7 @@ public class MemoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (mCurrentFragment == mContentFragment) {
-            mContentFragment.onBackKeyPressed();
+            mContentFragment.saveMemo();
             mBinding.fabAddMemo.show();
 
             replaceFragment(getHomeFragment(), TRANSIT_FRAGMENT_FADE);

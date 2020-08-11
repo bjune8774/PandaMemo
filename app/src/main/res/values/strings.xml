@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">PandaMemo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--  Fragment Memo Empty  -->
+    <string name="add_memo_guide">메모를 추가하려면 + 버튼을 눌러주세요</string>
+
+    <!--  Fragment Memo Content  -->
+    <string name="content_fragment_title">메모 작성</string>
+    <string name="memo_hint_title">제목</string>
+    <string name="memo_hint_content">내용</string>
 </resources>

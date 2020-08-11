@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#aaaaaa"
+        android:background="@color/colorLightGray"
         tools:context=".MemoContentFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="1dp"
-            android:background="#FFFFFF"
+            android:background="@color/colorWhite"
             android:gravity="center"
             android:paddingEnd="8dp">
 
@@ -29,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="메모 작성"
-                android:textColor="#000000"
+                android:text="@string/content_fragment_title"
+                android:textColor="@color/colorBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolBar"
             android:layout_alignParentBottom="true"
-            android:background="#FFFFFF"
+            android:background="@color/colorWhite"
             android:paddingStart="20dp"
             android:paddingTop="16dp"
             android:paddingEnd="20dp"
@@ -56,7 +56,7 @@
 
                 android:background="@null"
                 android:gravity="start|center_vertical"
-                android:hint="Title"
+                android:hint="@string/memo_hint_title"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
 
                 android:background="@null"
                 android:gravity="top|start"
-                android:hint="Content"
+                android:hint="@string/memo_hint_content"
                 android:inputType="textMultiLine|textNoSuggestions"
                 android:textSize="16sp" />
         </RelativeLayout>

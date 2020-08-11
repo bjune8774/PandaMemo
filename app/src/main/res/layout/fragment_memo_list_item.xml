@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:elevation="4dp"
-    android:background="#eeeeee"
+    android:background="@drawable/memo_list_shape"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:gravity="left"
+        android:gravity="start"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="16sp" />
 
@@ -21,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:gravity="left"
+        android:gravity="start"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="12sp" />
 </LinearLayout>
