@@ -3,38 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="com.panda.memo.MemoListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorLightGray"
-        android:orientation="vertical">
+        android:background="@color/colorWhite"
+        android:paddingTop="8dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".MemoListFragment"
+        tools:listitem="@layout/fragment_memo_list_item" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorWhite">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/app_name"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
-            android:name="com.panda.memo.MemoListFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="1dp"
-            android:paddingTop="8dp"
-            android:background="@color/colorWhite"
-            app:layoutManager="LinearLayoutManager"
-            tools:context=".MemoListFragment"
-            tools:listitem="@layout/fragment_memo_list_item" />
-    </LinearLayout>
 </layout>

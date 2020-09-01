@@ -16,6 +16,10 @@ public class MemoViewModel extends ViewModel {
         return MEMO_LIST;
     }
 
+    public MemoItem getMemo(int pos) {
+        return MEMO_LIST.get(pos);
+    }
+
     public void addMemo(String title, String content) {
         MEMO_LIST.add(new MemoItem(title, content));
     }

@@ -3,14 +3,10 @@ package com.panda.memo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -20,6 +16,10 @@ public class MemoContentFragment extends Fragment {
     private MemoViewModel mMemoViewModel;
     private FragmentMemoContentBinding mBinding;
     private int mPos;
+
+    public MemoContentFragment() {
+        mMemoViewModel = null;
+    }
 
     public MemoContentFragment(MemoViewModel memoViewModel) {
         mMemoViewModel = memoViewModel;
@@ -35,31 +35,25 @@ public class MemoContentFragment extends Fragment {
         mBinding.setViewModel(mMemoViewModel);
         mBinding.setLifecycleOwner(requireActivity());
 
-        ((MemoActivity) requireActivity()).setSupportActionBar(mBinding.toolBar);
-        ActionBar toolbar = ((MemoActivity) requireActivity()).getSupportActionBar();
-        toolbar.setDisplayHomeAsUpEnabled(true);
-        toolbar.setDisplayShowTitleEnabled(false);
-
-        setHasOptionsMenu(true);
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         Bundle bundle = getArguments();
-        if (bundle == null) {
-            // Set text view as null
-            mPos = -1;
+        mPos = bundle.getInt("pos");
+        Log.d("JUNE", "pos " + mPos);
+
+        updateContent(mPos);
+    }
+
+    public void updateContent(int pos) {
+        if (pos == -1) {
             mBinding.titleEditText.setText(null);
             mBinding.contentEditText.setText(null);
         } else {
-            // Set text view as memo contents if memo item is clicked
-            Log.d("JUNE", "pos " + mPos);
-            mPos = bundle.getInt("pos");
-            MemoItem memo = mMemoViewModel.getMemoList().get(mPos);
+            MemoItem memo = mMemoViewModel.getMemo(pos);
 
             mBinding.titleEditText.setText(memo.title);
             mBinding.contentEditText.setText(memo.content);
@@ -90,11 +84,5 @@ public class MemoContentFragment extends Fragment {
 
     private boolean isEmptyMemo(String title, String content) {
         return title.equals("") && content.equals("");
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_content_fragment, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 }

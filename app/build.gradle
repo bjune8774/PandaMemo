@@ -15,9 +15,44 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix ".dev"
+            debuggable true
+        }
+
+        stage {
+            initWith debug
+//            manifestPlaceholders = [hostName:"internal.example.com"]
+            applicationIdSuffix ".stg"
+        }
+    }
+
+    signingConfigs {
+
+        debug {
+            storeFile file("debug.jks")
+            storePassword "android"
+            keyAlias "debug_key"
+            keyPassword "android"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        stage {
+            initWith debug
+        }
+        release {
+            storeFile file("release.jks")
+            storePassword "android"
+            keyAlias "release_key"
+            keyPassword "android"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
     }
 
     dataBinding {
